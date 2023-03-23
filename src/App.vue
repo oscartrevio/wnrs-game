@@ -1,5 +1,5 @@
 <template>
-  <main class="">
+  <main class="overscroll-none overflow-hidden">
     <header>
       <PageTitle />
     </header>
@@ -36,7 +36,7 @@
       </div>
     </div>
   </main>
-  <footer class="flex justify-center absolute inset-x-0 -bottom-5">
+  <footer class="flex justify-center absolute inset-x-0 -bottom-4 text-xs">
     Hecho con ❤️ por Oscar Treviño.
   </footer>
 </template>
