@@ -28,10 +28,11 @@
         />
       </div>
       <div class="flex justify-center align-middle">
+        <DigDeeperCard v-show="digDeeperVisible" />
         <Card class="" :question="currentCard" :level="cardLevel" />
       </div>
       <div class="relative flex justify-center align-middle gap-4 px-4">
-        <DigDeeperButton class="" @click="" />
+        <DigDeeperButton class="" @click="showDigDeeperCard()" />
         <NextCardButton class="" @click="nextCard()" />
       </div>
     </div>
@@ -46,6 +47,7 @@ import PageTitle from "./components/PageTitle.vue";
 import LevelButton from "./components/LevelButton.vue";
 import NextCardButton from "./components/NextCardButton.vue";
 import DigDeeperButton from "./components/DigDeeperButton.vue";
+import DigDeeperCard from "./components/DigDeeperCard.vue";
 
 export default {
   name: "App",
@@ -55,6 +57,7 @@ export default {
     LevelButton,
     NextCardButton,
     DigDeeperButton,
+    DigDeeperCard,
   },
   data() {
     return {
@@ -73,6 +76,7 @@ export default {
       finalMessage: "YOU HAVE FINISHED THIS LEVEL!",
       lastCard:
         "EACH PLAYER WRITE A MESSAGE TO THE OTHER. FOLD AND EXCHANGE. OPEN ONLY ONCE YOU TWO HAVE PARTED.",
+      digDeeperVisible: false,
     };
   },
   created() {
@@ -86,6 +90,7 @@ export default {
       if (this.activeLevel === "levelOne") {
         this.levelOneIndex++;
         if (this.levelOneIndex >= this.levelOne.length) {
+          this.digDeeperVisible = false;
           this.currentCard = this.finalMessage;
           this.levelOneCompleted = true;
           return;
@@ -93,6 +98,7 @@ export default {
       } else if (this.activeLevel === "levelTwo") {
         this.levelTwoIndex++;
         if (this.levelTwoIndex >= this.levelTwo.length) {
+          this.digDeeperVisible = false;
           this.currentCard = this.finalMessage;
           this.levelTwoCompleted = true;
           return;
@@ -100,17 +106,20 @@ export default {
       } else if (this.activeLevel === "levelThree") {
         this.levelThreeIndex++;
         if (this.levelThreeIndex >= this.levelThree.length) {
+          this.digDeeperVisible = false;
           this.currentCard = this.lastCard;
           this.levelThreeCompleted = true;
           return;
         }
       }
+      this.digDeeperVisible = false;
       this.currentCard = this.getCurrentCard();
     },
     changeLevel(newLevel) {
       this.activeLevel = newLevel;
       this.currentCard = this.getCurrentCard();
       this.cardLevel = this.getCurrentLevel();
+      this.digDeeperVisible = false;
       if (this.levelOneCompleted === true && this.activeLevel === "levelOne") {
         return (this.currentCard = this.finalMessage);
       }
@@ -151,6 +160,21 @@ export default {
         return (this.cardLevel = "LEVEL 2: CONNECTION");
       } else if (this.activeLevel === "levelThree") {
         return (this.cardLevel = "LEVEL 3: REFLECTION");
+      }
+    },
+    showDigDeeperCard() {
+      this.digDeeperVisible = true;
+      if (this.levelOneCompleted === true && this.activeLevel === "levelOne") {
+        this.digDeeperVisible = false;
+      }
+      if (this.levelTwoCompleted === true && this.activeLevel === "levelTwo") {
+        this.digDeeperVisible = false;
+      }
+      if (
+        this.levelThreeCompleted === true &&
+        this.activeLevel === "levelThree"
+      ) {
+        this.digDeeperVisible = false;
       }
     },
     shuffleArray(array) {

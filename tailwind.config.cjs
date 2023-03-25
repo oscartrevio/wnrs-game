@@ -12,6 +12,7 @@ module.exports = {
       colors: {
         wnrs: "#B22423",
         offwhite: "#F5F5F5",
+        digdeeperborder: "rgba(255, 255, 255, 0.35)",
       },
     },
   },
