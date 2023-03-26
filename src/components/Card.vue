@@ -6,7 +6,7 @@
     <div class="text-base p-4">{{ question }}</div>
     <div class="absolute bottom-4 text-xs">WE'RE NOT REALLY STRANGERS</div>
     <div
-      class="absolute h-60 w-60 inset-auto bg-wnrs rounded-full blur-2xl -z-10"
+      class="absolute h-60 w-60 inset-auto bg-wnrs rounded-full blur-2xl -z-10 opacity-80"
     ></div>
   </div>
 </template>
