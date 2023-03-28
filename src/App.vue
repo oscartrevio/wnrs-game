@@ -509,7 +509,11 @@ export default {
       }
     },
     showDigDeeperCard() {
-      this.digDeeperVisible = true;
+      if (this.digDeeperVisible == false) {
+        this.digDeeperVisible = true;
+      } else {
+        this.digDeeperVisible = false;
+      }
       if (this.levelOneCompleted === true && this.activeLevel === "levelOne") {
         this.digDeeperVisible = false;
       }
