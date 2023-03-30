@@ -1,43 +1,54 @@
 <template>
-  <main class="overscroll-none overflow-hidden">
-    <header>
+  <header>
+    <div class="container">
       <PageTitle />
-    </header>
-    <div class="h-full w-full my-24 space-y-12">
-      <div class="flex justify-center gap-3 mx-4">
-        <LevelButton
-          :level="'LEVEL 1'"
-          :levelType="'( PERCEPTION )'"
-          :levelId="'levelOne'"
-          :activeLevel="activeLevel"
-          @click="changeLevel('levelOne')"
-        />
-        <LevelButton
-          :level="'LEVEL 2'"
-          :levelType="'( CONNECTION )'"
-          :levelId="'levelTwo'"
-          :activeLevel="activeLevel"
-          @click="changeLevel('levelTwo')"
-        />
-        <LevelButton
-          :level="'LEVEL 3'"
-          :levelType="'( REFLECTION )'"
-          :levelId="'levelThree'"
-          :activeLevel="activeLevel"
-          @click="changeLevel('levelThree')"
-        />
-      </div>
+    </div>
+  </header>
+  <content class="h-max w-full space-y-10 my-auto absolute inset-y-1/2">
+    <div class="container mx-auto flex justify-center gap-2 px-4">
+      <LevelButton
+        :level="'LEVEL 1'"
+        :levelType="'( PERCEPTION )'"
+        :levelId="'levelOne'"
+        :activeLevel="activeLevel"
+        @click="changeLevel('levelOne')"
+      />
+      <LevelButton
+        :level="'LEVEL 2'"
+        :levelType="'( CONNECTION )'"
+        :levelId="'levelTwo'"
+        :activeLevel="activeLevel"
+        @click="changeLevel('levelTwo')"
+      />
+      <LevelButton
+        :level="'LEVEL 3'"
+        :levelType="'( REFLECTION )'"
+        :levelId="'levelThree'"
+        :activeLevel="activeLevel"
+        @click="changeLevel('levelThree')"
+      />
+    </div>
+    <div
+      class="container flex flex-col justify-center align-middle items-center gap-1"
+    >
+      <CardNumberPill class="" :card="cardNumber" :length="levelLength" />
       <div class="flex justify-center align-middle">
         <DigDeeperCard v-show="digDeeperVisible" />
         <Card class="" :question="currentCard" :level="cardLevel" />
       </div>
-      <div class="relative flex justify-center align-middle gap-2 px-8">
-        <DigDeeperButton class="" @click="showDigDeeperCard()" />
-        <PreviousCardButton class="" @click="previousCard()" />
-        <NextCardButton class="" @click="nextCard()" />
-      </div>
     </div>
-  </main>
+    <div
+      class="container relative flex justify-center align-middle gap-2 mx-auto px-5"
+    >
+      <DigDeeperButton
+        class=""
+        @click="showDigDeeperCard()"
+        :digDeeperVisible="digDeeperVisible"
+      />
+      <PreviousCardButton class="" @click="previousCard()" />
+      <NextCardButton class="" @click="nextCard()" />
+    </div>
+  </content>
   <!-- <footer class="flex justify-center absolute inset-x-0 -bottom-4 text-xs">
     Hecho con ❤️ por Oscar Treviño.
   </footer> -->
@@ -50,6 +61,7 @@ import NextCardButton from "./components/NextCardButton.vue";
 import DigDeeperButton from "./components/DigDeeperButton.vue";
 import DigDeeperCard from "./components/DigDeeperCard.vue";
 import PreviousCardButton from "./components/PreviousCardButton.vue";
+import CardNumberPill from "./components/CardNumberPill.vue";
 
 export default {
   name: "App",
@@ -61,6 +73,7 @@ export default {
     DigDeeperButton,
     DigDeeperCard,
     PreviousCardButton,
+    CardNumberPill,
   },
   data() {
     return {
@@ -391,6 +404,8 @@ export default {
       lastCard:
         "EACH PLAYER WRITE A MESSAGE TO THE OTHER. FOLD AND EXCHANGE. OPEN ONLY ONCE YOU TWO HAVE PARTED.",
       digDeeperVisible: false,
+      cardNumber: 0,
+      levelLength: 0,
     };
   },
   created() {
@@ -398,6 +413,8 @@ export default {
     this.shuffleArray(this.levelTwo);
     this.shuffleArray(this.levelThree);
     this.currentCard = this.getCurrentCard();
+    this.cardNumber = this.getCardNumber();
+    this.levelLength = this.getLevelLength();
   },
   methods: {
     nextCard() {
@@ -427,17 +444,20 @@ export default {
         }
         if (this.levelThreeIndex >= this.levelThree.length) {
           this.digDeeperVisible = false;
-          this.currentCard = this.lastCard;
           this.levelThreeCompleted = true;
+          this.currentCard = this.lastCard;
           return;
         }
       }
       this.digDeeperVisible = false;
       this.currentCard = this.getCurrentCard();
+      this.cardNumber = this.getCardNumber();
+      this.levelLength = this.getLevelLength();
     },
     previousCard() {
       if (this.activeLevel === "levelOne") {
         if (this.levelOneIndex === 0) {
+          this.digDeeperVisible = false;
           return;
         } else {
           this.levelOneCompleted = false;
@@ -445,6 +465,7 @@ export default {
         }
       } else if (this.activeLevel === "levelTwo") {
         if (this.levelTwoIndex === 0) {
+          this.digDeeperVisible = false;
           return;
         } else {
           this.levelTwoCompleted = false;
@@ -452,6 +473,7 @@ export default {
         }
       } else if (this.activeLevel === "levelThree") {
         if (this.levelThreeIndex === 0) {
+          this.digDeeperVisible = false;
           return;
         } else {
           this.levelThreeCompleted = false;
@@ -460,19 +482,24 @@ export default {
       }
       this.digDeeperVisible = false;
       this.currentCard = this.getCurrentCard();
+      this.cardNumber = this.getCardNumber();
+      this.levelLength = this.getLevelLength();
     },
     changeLevel(newLevel) {
       this.activeLevel = newLevel;
       this.currentCard = this.getCurrentCard();
       this.cardLevel = this.getCurrentLevel();
+      this.cardNumber = this.getCardNumber();
+      this.levelLength = this.getLevelLength();
       this.digDeeperVisible = false;
       if (this.levelOneCompleted === true && this.activeLevel === "levelOne") {
         return (this.currentCard = this.finalMessage);
-      }
-      if (this.levelTwoCompleted === true && this.activeLevel === "levelTwo") {
+      } else if (
+        this.levelTwoCompleted === true &&
+        this.activeLevel === "levelTwo"
+      ) {
         return (this.currentCard = this.finalMessage);
-      }
-      if (
+      } else if (
         this.levelThreeCompleted === true &&
         this.activeLevel === "levelThree"
       ) {
@@ -498,6 +525,8 @@ export default {
       ) {
         return this.levelThree[this.levelThreeIndex];
       }
+      this.cardNumber = this.getCardNumber();
+      this.levelLength = this.getLevelLength();
     },
     getCurrentLevel() {
       if (this.activeLevel === "levelOne") {
@@ -505,8 +534,13 @@ export default {
       } else if (this.activeLevel === "levelTwo") {
         return (this.cardLevel = "LEVEL 2: CONNECTION");
       } else if (this.activeLevel === "levelThree") {
-        return (this.cardLevel = "LEVEL 3: REFLECTION");
+        if (this.levelThreeIndex >= this.levelThree.length) {
+          return (this.cardLevel = "FINAL CARD");
+        } else {
+          return (this.cardLevel = "LEVEL 3: REFLECTION");
+        }
       }
+      return this.cardLevel;
     },
     showDigDeeperCard() {
       if (this.digDeeperVisible == false) {
@@ -526,6 +560,26 @@ export default {
       ) {
         this.digDeeperVisible = false;
       }
+    },
+    getCardNumber() {
+      if (this.activeLevel === "levelOne") {
+        this.cardNumber = this.levelOneIndex + 1;
+      } else if (this.activeLevel === "levelTwo") {
+        this.cardNumber = this.levelTwoIndex + 1;
+      } else if (this.activeLevel === "levelThree") {
+        this.cardNumber = this.levelThreeIndex + 1;
+      }
+      return this.cardNumber;
+    },
+    getLevelLength() {
+      if (this.activeLevel === "levelOne") {
+        this.levelLength = this.levelOne.length;
+      } else if (this.activeLevel === "levelTwo") {
+        this.levelLength = this.levelTwo.length;
+      } else if (this.activeLevel === "levelThree") {
+        this.levelLength = this.levelThree.length;
+      }
+      return this.levelLength;
     },
     shuffleArray(array) {
       // Fisher-Yates shuffle algorithm

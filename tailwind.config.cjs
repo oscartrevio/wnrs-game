@@ -13,10 +13,12 @@ module.exports = {
         wnrs: "#B22423",
         offwhite: "#F5F5F5",
         digdeeperborder: "rgba(255, 255, 255, 0.35)",
+        blk: "#1F1F1F",
       },
       animation: {
         flipfwd: "flipfwd 0.5s ease-in-out both",
         slidefwd: "slidefwd 0.5s ease-in-out both",
+        "spin-slow": "spin 5s ease-in-out infinite",
       },
       keyframes: {
         flipfwd: {

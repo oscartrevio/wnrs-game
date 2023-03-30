@@ -1,6 +1,14 @@
 <template>
   <button
-    class="w-2/4 p-2 rounded-xl font-bold font-main text-black uppercase text-base border-2 border-black bg-offwhite hover:bg-black hover:text-white focus:ring-4 focus:outline-none focus:ring-black/50 shadow-xl select-none touch-manipulation inline-flex justify-center align-middle items-center hover:fill-white"
+    class="w-2/4 p-2 rounded-xl font-bold font-main uppercase text-base border-2 border-blk focus:ring-4 focus:outline-none focus:ring-blk/50 shadow-lg select-none touch-manipulation inline-flex justify-center align-middle items-center"
+    :class="{
+      'bg-offwhite': digDeeperVisible == false,
+      'text-blk': digDeeperVisible == false,
+      'fill-blk': digDeeperVisible == false,
+      'bg-blk': digDeeperVisible == true,
+      'text-offwhite': digDeeperVisible == true,
+      'fill-offwhite': digDeeperVisible == true,
+    }"
   >
     Dig Deeper
     <svg
@@ -15,5 +23,12 @@
   </button>
 </template>
 <script>
-export default {};
+export default {
+  props: {
+    digDeeperVisible: {
+      type: Boolean,
+      required: true,
+    },
+  },
+};
 </script>

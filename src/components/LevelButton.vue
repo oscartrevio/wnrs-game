@@ -1,9 +1,10 @@
 <template>
   <button
-    class="flex flex-col items-center justify-center border-2 border-wnrs bg-offwhite rounded-xl font-main font-bold leading-none h-16 w-1/3 align-middle select-none shadow-sm touch-manipulation"
+    class="flex flex-col items-center justify-center border-2 border-wnrs bg-offwhite rounded-xl font-main font-bold leading-none h-16 w-1/3 align-middle select-none shadow-lg touch-manipulation"
     :class="{
       'bg-wnrs': levelId === activeLevel,
-      'text-white': levelId === activeLevel,
+      'text-offwhite': levelId === activeLevel,
+      'text-blk': levelId != activeLevel,
     }"
   >
     <span class="text-base">{{ level }}</span>
