@@ -4,14 +4,9 @@
       class="textures absolute h-56 w-96 -rotate-3 rounded-[46px] z-20 mix-blend-overlay"
     >
       <img
-        src="/src/assets/fingerprint-overlay.jpg"
-        alt=""
-        class="absolute h-56 w-96 opacity-20 rounded-[46px]"
-      />
-      <img
         src="/src/assets/dust-overlay.png"
         alt=""
-        class="absolute h-56 w-96 opacity-80 rounded-[46px]"
+        class="absolute h-56 w-96 opacity-100 rounded-[46px]"
       />
     </div>
     <div

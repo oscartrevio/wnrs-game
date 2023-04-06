@@ -1,10 +1,10 @@
 <template>
   <button
-    class="w-1/4 p-4 rounded-lg bg-wnrs hover:bg-wnrs/90 focus:ring-4 ring-wnrs/50 font-bold font-main text-white uppercase text-base shadow-xl select-none touch-manipulation inline-flex justify-center align-middle items-center"
+    class="w-1/4 p-4 rounded-lg bg-wnrs hover:bg-wnrs/90 focus:ring-4 ring-wnrs/50 font-bold font-main text-offwhite uppercase text-base shadow-xl select-none touch-manipulation inline-flex justify-center align-middle items-center"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill="#ffffff"
+      fill="#F6F8FA"
       class="w-5 h-5"
       viewBox="0 0 448 512"
     >

@@ -7,18 +7,22 @@ module.exports = {
     },
     extend: {
       backgroundImage: {
-        "card-texture": "url('/src/assets/card-texture.jpg')",
+        "card-texture": "url('/src/assets/textured-white-min.jpg')",
       },
       colors: {
         wnrs: "#B22423",
-        offwhite: "#F5F5F5",
+        offwhite: "#F6F8FA",
         digdeeperborder: "rgba(255, 255, 255, 0.35)",
         blk: "#1F1F1F",
       },
       animation: {
         flipfwd: "flipfwd 0.5s ease-in-out both",
         slidefwd: "slidefwd 0.5s ease-in-out both",
-        "spin-slow": "spin 5s ease-in-out infinite",
+        "spin-slow": "spin 6s linear infinite",
+      },
+      boxShadow: {
+        "3xl": "rgba(0, 0, 0, 0.1) 0px 10px 40px 0px",
+        nav: "0px 0px 50px rgba(0, 0, 0, 0.15)",
       },
       keyframes: {
         flipfwd: {
