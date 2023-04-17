@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex h-max w-max px-3 py-1 rounded-full justify-center align-middle items-center text-center bg-wnrs text-offwhite font-main font-bold text-xs shadow-lg"
+    class="flex h-max w-max px-3 py-1 rounded-full justify-center align-middle items-center text-center bg-wnrs text-offwhite font-main font-bold text-xs select-none"
   >
     {{ card }} / {{ length }}
   </div>

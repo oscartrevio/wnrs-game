@@ -1,10 +1,10 @@
 <template>
-  <header>
-    <PageTitle></PageTitle>
-  </header>
-  <main class="h-screen w-full">
+  <body class="h-screen w-screen overflow-y-hidden">
+    <header>
+      <PageTitle />
+    </header>
     <div
-      class="flex justify-center items-center p-4 m-4 text-sm text-green-800 rounded-xl bg-green-200/80 -z-50"
+      class="absolute flex justify-center items-center p-4 mx-4 my-20 text-sm text-green-800 rounded-xl bg-green-200/80"
       role="alert"
       v-show="openAlert"
     >
@@ -21,58 +21,61 @@
           clip-rule="evenodd"
         ></path>
       </svg>
-      <span class="sr-only">Info</span>
       <div>
         <span class="font-medium">Success!</span> The message was sent
         succesfully.
       </div>
     </div>
-    <div
-      class="h-96 w-96 absolute inset-x-0 inset-y-1/2 mx-auto my-auto p-4 bg-card-texture bg-cover flex flex-col justify-center items-center font-main font-bold text-wnrs uppercase rounded-xl shadow-xl"
-    >
-      <h2 class="text-center mb-2 text-xl">FEEDBACK</h2>
-      <form class="h-full w-full" @submit="handleSubmitFeedback">
-        <div class="flex flex-col">
-          <label for="name" class="mb-2">Your name</label>
-          <input
-            type="text"
-            id="name"
-            class="block p-3 mb-4 w-full text-sm text-blk bg-offwhite rounded-lg border border-gray-400 focus:ring-wnrs/50 focus:border-wnrs/50 placeholder-blk/80"
-            placeholder="Name"
-            v-model="name"
-            required
-          />
-        </div>
-        <div class="flex flex-col">
-          <label for="message" class="mb-2">Your message</label>
-          <textarea
-            id="message"
-            rows="5"
-            class="block p-3 mb-4 w-full text-sm text-blk bg-offwhite rounded-lg border border-gray-400 focus:ring-wnrs/50 focus:border-wnrs/50 placeholder-blk/80"
-            placeholder="Leave a message..."
-            v-model="message"
-            required
-          ></textarea>
-        </div>
-        <button
-          @click=""
-          type="submit"
-          class="bg-wnrs text-offwhite hover:bg-wnrs/90 focus:ring-4 ring-wnrs/50 p-3 w-24 rounded-xl uppercase shadow-lg"
+    <main class="container h-full w-full bg-wnrs">
+      <div class="flex justify-center align-middle items-center">
+        <p class="text-xs text-offwhite font-main font-bold p-4 mt-16">
+          Si algo no sirve, si algo no se ve bien en tu dispositivo, o si crees
+          que algo puede mejorar, házmelo saber. Cualquier tipo de feedback me
+          ayuda. :)
+        </p>
+      </div>
+      <div
+        class="absolute h-5/6 w-full top-[20%] mx-auto p-8 bg-offwhite flex flex-col justify-center items-center font-main font-bold text-blk uppercase rounded-xl shadow-xl"
+      >
+        <h2 class="text-center my-4 text-2xl text-wnrs">FEEDBACK</h2>
+        <form
+          class="h-full w-full flex flex-col items-center gap-2"
+          @submit="handleSubmitFeedback"
         >
-          Submit
-        </button>
-      </form>
-      <div
-        class="absolute h-96 w-96 bg-wnrs inset-auto rounded-full blur-xl -z-20 opacity-60 origin-[40%_50%] mix-blend-multiply animate-spin-slow"
-      ></div>
-      <div
-        class="absolute h-96 w-96 bg-[#DA4444] inset-auto rounded-full blur-xl -z-20 opacity-60 origin-[60%_50%] animation-delay-1000 animate-spin-slow mix-blend-multiply"
-      ></div>
-    </div>
-  </main>
-  <footer>
-    <NavBar></NavBar>
-  </footer>
+          <div class="flex flex-col w-full">
+            <label for="name" class="mb-1">Name</label>
+            <input
+              type="text"
+              id="name"
+              class="block p-3 mb-4 w-full text-sm text-blk bg-gray-200 rounded-lg focus:ring-wnrs/50 focus:border-wnrs/50 placeholder-blk/80"
+              v-model="name"
+              required
+            />
+          </div>
+          <div class="flex flex-col w-full">
+            <label for="message" class="mb-1">Message</label>
+            <textarea
+              id="message"
+              rows="5"
+              class="block p-3 mb-4 w-full text-sm text-blk bg-gray-200 rounded-lg focus:ring-wnrs/50 focus:border-wnrs/50 placeholder-blk/80"
+              v-model="message"
+              required
+            ></textarea>
+          </div>
+          <button
+            @click=""
+            type="submit"
+            class="bg-wnrs text-offwhite hover:bg-wnrs/90 focus:ring-4 ring-wnrs/50 p-3 w-full rounded-xl uppercase shadow-lg shadow-wnrs/20"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </main>
+    <footer>
+      <NavBar :activeTab="'feedback'"></NavBar>
+    </footer>
+  </body>
 </template>
 <script>
 import PageTitle from "./PageTitle.vue";

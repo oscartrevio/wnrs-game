@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="textures absolute h-56 w-96 -rotate-3 rounded-[46px] z-20 mix-blend-overlay"
+      class="absolute h-56 w-96 -rotate-3 rounded-[46px] z-20 mix-blend-overlay"
     >
       <img
         src="/src/assets/dust-overlay.png"

@@ -1,6 +1,6 @@
 <template>
   <button
-    class="w-2/4 p-2 rounded-xl font-bold font-main uppercase text-base border-2 border-blk focus:ring-4 focus:outline-none focus:ring-blk/50 shadow-lg select-none touch-manipulation inline-flex justify-center align-middle items-center"
+    class="w-2/4 h-14 rounded-xl font-bold font-main uppercase text-base border-2 border-blk focus:ring-4 focus:outline-none focus:ring-blk/50 select-none touch-manipulation inline-flex justify-center align-middle items-center shadow-lg"
     :class="{
       'bg-offwhite': digDeeperVisible == false,
       'text-blk': digDeeperVisible == false,

@@ -1,6 +1,6 @@
 <template>
   <button
-    class="w-1/4 p-4 rounded-lg bg-wnrs hover:bg-wnrs/90 focus:ring-4 ring-wnrs/50 font-bold font-main text-offwhite uppercase text-base shadow-xl select-none touch-manipulation inline-flex justify-center align-middle items-center"
+    class="w-1/4 h-14 rounded-xl bg-wnrs hover:bg-wnrs/90 focus:ring-4 ring-wnrs/50 font-bold font-main text-offwhite uppercase text-base select-none touch-manipulation inline-flex justify-center align-middle items-center shadow-lg shadow-wnrs/20"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
